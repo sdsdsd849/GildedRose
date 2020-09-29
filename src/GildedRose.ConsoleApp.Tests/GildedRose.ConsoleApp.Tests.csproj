@@ -8,7 +8,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="ApprovalTests" Version="5.4.2" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
 			<PrivateAssets>all</PrivateAssets>
@@ -18,6 +18,12 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\GildedRose.ConsoleApp\GildedRose.ConsoleApp.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="TextDiffTests\StandardInputOutput.ThirtyOneDay.approved.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

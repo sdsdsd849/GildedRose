@@ -14,13 +14,19 @@ namespace GildedRose.ConsoleApp
         {
             foreach (var item in _items)
             {
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (!item.Name.StartsWith("Aged") && !item.Name.StartsWith("Backstage passes"))
                 {
                     if (item.Quality > 0)
                     {
-                        if (item.Name != "Sulfuras, Hand of Ragnaros")
+                        if (!item.Name.StartsWith("Sulfuras") && !item.Name.StartsWith("Conjured"))
                         {
                             item.Quality -= 1;
+                        }
+                        else if (item.Name.StartsWith("Conjured"))
+                        {
+                            if (item.Quality > 1)
+                                item.Quality -= 2;
+                            else item.Quality -= 1;
                         }
                     }
                 }
@@ -30,7 +36,7 @@ namespace GildedRose.ConsoleApp
                     {
                         item.Quality += 1;
 
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (item.Name.StartsWith("Backstage passes"))
                         {
                             if (item.SellIn < 11)
                             {
@@ -51,20 +57,26 @@ namespace GildedRose.ConsoleApp
                     }
                 }
 
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                if (!item.Name.StartsWith("Sulfuras"))
                 {
                     item.SellIn -= 1;
                 }
 
                 if (item.SellIn >= 0) continue;
-                if (item.Name != "Aged Brie")
+                if (!item.Name.StartsWith("Aged"))
                 {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                    if (!item.Name.StartsWith("Backstage passes"))
                     {
                         if (item.Quality <= 0) continue;
-                        if (item.Name != "Sulfuras, Hand of Ragnaros")
+                        if (!item.Name.StartsWith("Sulfuras") && !item.Name.StartsWith("Conjured"))
                         {
                             item.Quality -= 1;
+                        }
+                        else if (item.Name.StartsWith("Conjured"))
+                        {
+                            if (item.Quality > 1)
+                                item.Quality -= 2;
+                            else item.Quality -= 1;
                         }
                     }
                     else
