@@ -1,4 +1,4 @@
-﻿namespace GildedRose.ConsoleApp
+﻿namespace GildedRose.ConsoleApp.Models
 {
     public class Item
     {

@@ -14,11 +14,11 @@ namespace GildedRose.ConsoleApp.Tests.TextDiffTests
         [Fact]
         public void ThirtyOneDay()
         {
-            var expectedOutput = new StringBuilder(File.ReadAllText(Path.Combine(nameof(TextDiffTests), "StandardInputOutput.ThirtyOneDay.approved.txt")));
-            Console.SetOut(new StringWriter());
+            var consoleOutput = new StringBuilder();
+            Console.SetOut(new StringWriter(consoleOutput));
             Console.SetIn(new StringReader("a\n"));
             Program.Main();
-            Approvals.Verify(expectedOutput.ToString());
+            Approvals.Verify(consoleOutput);
         }
     }
 }

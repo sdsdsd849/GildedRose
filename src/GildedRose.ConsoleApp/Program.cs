@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using GildedRose.ConsoleApp.Models;
+using GildedRose.ConsoleApp.Processors;
+using GildedRose.ConsoleApp.Shop;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GildedRose.ConsoleApp
 {
@@ -7,6 +11,12 @@ namespace GildedRose.ConsoleApp
     {
         public static void Main()
         {
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IRulesProcessor, RulesProcessor>()
+                .AddSingleton<IShop, GildedRoseRefactored>()
+                .BuildServiceProvider();
+            var app = serviceProvider.GetService<IShop>();
+
             Console.WriteLine("OMGHAI!");
 
             IList<Item> items = new List<Item>{
@@ -33,11 +43,8 @@ namespace GildedRose.ConsoleApp
                     SellIn = 5,
                     Quality = 49
                 },
-                // this conjured item does not work properly yet
                 new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
             };
-
-            var app = new GildedRose(items);
 
 
             for (var i = 0; i < 31; i++)
@@ -49,7 +56,7 @@ namespace GildedRose.ConsoleApp
                     Console.WriteLine(t.Name + ", " + t.SellIn + ", " + t.Quality);
                 }
                 Console.WriteLine("");
-                app.UpdateQuality();
+                app.UpdateQuality(items);
             }
         }
     }

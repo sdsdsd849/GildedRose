@@ -1,13 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using GildedRose.ConsoleApp.Models;
+using GildedRose.ConsoleApp.Processors.Rules;
 using Xunit;
+using static GildedRose.ConsoleApp.Processors.Configuration.ItemUpdateConfiguration;
 
 namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
 {
     [ExcludeFromCodeCoverage]
     [Collection("Regular items rules tests (*Non-negative quality covered by other tests)")]
-    public sealed class RegularItemRules
+    public sealed class RegularItemRulesTests : IDisposable
     {
+        private readonly RegularItemRules _rules;
+        public RegularItemRulesTests()
+        {
+            _rules = new RegularItemRules();
+        }
+
+        public void Dispose()
+        {
+            _rules.Dispose();
+        }
+
         [Theory]
         [InlineData("Regular cake", 8, 4)]
         [InlineData("Regular salt", 8, 2)]
@@ -15,17 +29,16 @@ namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
         [InlineData("Regular father belt", 1, 1)]
         public void GivenItemWhenSellByDateNotPassedThenItQualityDegradesByConstAmountEachDay(string name, int sellIn, int quality)
         {
-            IList<Item> itemWrappedInAList = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
-            var qualityAfterOneDay = RulesTestsHelpers.GetUpdatedParametersAfterOneDay(itemWrappedInAList).Quality;
+            var qualityAfterOneDay = _rules.ApplyItemSpecificRule(new Item { Name = name, SellIn = sellIn, Quality = quality }).Quality;
 
-            if (quality <= 1)
+            if (quality <= RegularQualityDegrease)
             {
-                Assert.Equal(0, qualityAfterOneDay);
+                Assert.Equal(default, qualityAfterOneDay);
             }
             else
             {
                 var qualityDifference = quality - qualityAfterOneDay;
-                Assert.Equal(1, qualityDifference);
+                Assert.Equal(RegularQualityDegrease, qualityDifference);
             }
         }
 
@@ -34,17 +47,16 @@ namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
         [InlineData("Regular cake", 0, 2)]
         public void GivenItemWhenSellByDatePassedThenItQualityDegradesTwiceAsFastEachDay(string name, int sellIn, int quality)
         {
-            IList<Item> itemWrappedInAList = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
-            var qualityAfterOneDay = RulesTestsHelpers.GetUpdatedParametersAfterOneDay(itemWrappedInAList).Quality;
-
-            if (quality <= 2)
+            var qualityAfterOneDay = _rules.ApplyItemSpecificRule(new Item { Name = name, SellIn = sellIn, Quality = quality }).Quality;
+            
+            if (quality <= RegularQualityDegrease * 2)
             {
-                Assert.Equal(0, qualityAfterOneDay);
+                Assert.Equal(default, qualityAfterOneDay);
             }
             else
             {
                 var qualityDifference = quality - qualityAfterOneDay;
-                Assert.Equal(2, qualityDifference);
+                Assert.Equal(RegularQualityDegrease * 2, qualityDifference);
             }
         }
     }
