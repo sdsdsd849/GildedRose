@@ -1,6 +1,6 @@
 ﻿namespace GildedRose.ConsoleApp.Processors.Configuration
 {
-    internal class ItemUpdateConfiguration
+    internal static class ItemUpdateConfiguration
     {
         public const int RegularQualityIncrease = 1;
         public const int RegularQualityDegrease = 1;

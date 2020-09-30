@@ -3,7 +3,7 @@ using GildedRose.ConsoleApp.Models;
 
 namespace GildedRose.ConsoleApp.Processors.Rules
 {
-    public abstract class AbstractRules
+    public abstract class AbstractRules : IDisposable
     {
         public Tuple<Item, string> ApplyRule(Item item)
         {
