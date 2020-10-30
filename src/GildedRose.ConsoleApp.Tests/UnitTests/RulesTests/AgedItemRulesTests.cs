@@ -8,20 +8,14 @@ using static GildedRose.ConsoleApp.Processors.Configuration.ItemUpdateConfigurat
 namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
 {
     [ExcludeFromCodeCoverage]
-    [Collection("Aged item rules tests (*Non-negative quality covered by other tests)")]
-    public sealed class AgedItemRulesTests : IDisposable
+    [Collection("Aged item rules tests (*Non-negative quality covered by other tests to simply (yes I know that if looks messy))")]
+    public sealed class AgedItemRulesTests
     {
         private readonly AgedItemRules _rules;
         public AgedItemRulesTests()
         {
             _rules = new AgedItemRules();
         }
-
-        public void Dispose()
-        {
-            _rules.Dispose();
-        }
-
 
         [Theory]
         [InlineData("Aged cake", 8, 4)]

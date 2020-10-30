@@ -8,18 +8,13 @@ using static GildedRose.ConsoleApp.Processors.Configuration.ItemUpdateConfigurat
 namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
 {
     [ExcludeFromCodeCoverage]
-    [Collection("Conjured items rules tests (*Non-negative quality covered by other tests)")]
-    public sealed class ConjuredItemRulesTests : IDisposable
+    [Collection("Conjured items rules tests (*Non-negative quality covered by other tests (yes I know that if looks messy)))")]
+    public sealed class ConjuredItemRulesTests
     {
         private readonly ConjuredItemRules _rules;
         public ConjuredItemRulesTests()
         {
             _rules = new ConjuredItemRules();
-        }
-
-        public void Dispose()
-        {
-            _rules.Dispose();
         }
 
         [Theory]
@@ -66,5 +61,6 @@ namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
             var qualityAfterOneDay = _rules.ApplyItemSpecificRule(new Item { Name = name, SellIn = sellIn, Quality = quality }).Quality;
             Assert.Equal(default, qualityAfterOneDay);
         }
+
     }
 }

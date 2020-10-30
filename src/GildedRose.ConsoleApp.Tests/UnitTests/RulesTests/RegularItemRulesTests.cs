@@ -8,18 +8,13 @@ using static GildedRose.ConsoleApp.Processors.Configuration.ItemUpdateConfigurat
 namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
 {
     [ExcludeFromCodeCoverage]
-    [Collection("Regular items rules tests (*Non-negative quality covered by other tests)")]
-    public sealed class RegularItemRulesTests : IDisposable
+    [Collection("Regular items rules tests (*Non-negative quality covered by other tests (yes I know that if looks messy)))")]
+    public sealed class RegularItemRulesTests
     {
         private readonly RegularItemRules _rules;
         public RegularItemRulesTests()
         {
             _rules = new RegularItemRules();
-        }
-
-        public void Dispose()
-        {
-            _rules.Dispose();
         }
 
         [Theory]

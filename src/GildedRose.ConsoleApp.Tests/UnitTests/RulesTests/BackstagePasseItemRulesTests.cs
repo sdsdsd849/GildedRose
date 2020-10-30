@@ -6,20 +6,14 @@ using static GildedRose.ConsoleApp.Processors.Configuration.ItemUpdateConfigurat
 
 namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
 {
-    [Collection("Backstage passe item rules tests (*Non-negative quality covered by other tests)")]
-    public sealed class BackstagePasseItemRulesTests : IDisposable
+    [Collection("Backstage passe item rules tests (*Non-negative quality covered by other tests (yes I know that if looks messy)))")]
+    public sealed class BackstagePasseItemRulesTests
     {
         private readonly BackstagePasseItemRules _rules;
         public BackstagePasseItemRulesTests()
         {
             _rules = new BackstagePasseItemRules();
         }
-
-        public void Dispose()
-        {
-            _rules.Dispose();
-        }
-
 
         [Fact]
         public void GivenBackstagePassesWhenSellByValueIsGreaterThanTenThenIncreasesInQualityByConstantAmount()
@@ -63,6 +57,5 @@ namespace GildedRose.ConsoleApp.Tests.UnitTests.RulesTests
             var sellInAfterNDays = _rules.ApplyItemSpecificRule(new Item { Name = name, SellIn = sellIn, Quality = quality }).SellIn;
             Assert.Equal(expected, sellInAfterNDays);
         }
-
     }
 }

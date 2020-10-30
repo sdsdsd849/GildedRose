@@ -11,6 +11,7 @@ namespace GildedRose.ConsoleApp
     {
         public static void Main()
         {
+            // I just like to use DI, I know that it's not needed here
             var serviceProvider = new ServiceCollection()
                 .AddSingleton<IRulesProcessor, RulesProcessor>()
                 .AddSingleton<IShop, GildedRoseRefactored>()
